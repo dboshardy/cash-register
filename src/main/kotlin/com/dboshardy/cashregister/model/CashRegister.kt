@@ -12,6 +12,25 @@ data class CashRegister(private var bills: List<Int> = listOf(0,0,0,0,0)) {
 
 
     /*
+     * returns string of values
+     */
+    fun makeChange(amount: Int): String {
+        if(cannotMakeChange(amount)) {
+            return "I apologize, but I cannot make change for $amount with the bills I have.\n${show()}"
+        }
+
+        val remainders = bills.withIndex().map { it.value % valueOf(it.index) }
+
+
+        return ""
+
+    }
+
+    private fun cannotMakeChange(amount: Int): Boolean {
+        return false
+    }
+
+    /*
      * Takes an array of bills assumed to be in proper order and puts them in the register
      */
     fun put(bills: List<Int>): String {
