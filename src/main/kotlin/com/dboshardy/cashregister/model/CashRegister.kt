@@ -1,15 +1,12 @@
 package com.dboshardy.cashregister.model
 
-import kotlin.coroutines.experimental.EmptyCoroutineContext.plus
-
-private val PROPER_INPUT_FORMAT = "TWENTIES TENS FIVES TWOS ONES"
-private val TWENTIES_INDEX = 0
-private val TENS_INDEX = 1
-private val FIVES_INDEX = 2
-private val TWOS_INDEX = 3
-private val ONES_INDEX = 4
-
 data class CashRegister(private var bills: List<Int> = listOf(0,0,0,0,0)) {
+    private val PROPER_INPUT_FORMAT = "TWENTIES TENS FIVES TWOS ONES"
+    private val TWENTIES_INDEX = 0
+    private val TENS_INDEX = 1
+    private val FIVES_INDEX = 2
+    private val TWOS_INDEX = 3
+    private val ONES_INDEX = 4
     constructor(twenties: Int, tens: Int, fives: Int, twos: Int, ones: Int) : this(listOf(twenties, tens, fives, twos, ones))
     private val NUM_BILL_TYPES = bills.size
 
