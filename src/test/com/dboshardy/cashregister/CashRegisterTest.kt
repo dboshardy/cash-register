@@ -41,12 +41,14 @@ class CashRegisterTest {
     @org.junit.Test
     fun testTakeTooManyBills() {
         val bills = listOf(6, 7, 8, 9, 10)
-        register.take(bills)
-        assertEquals(expected = 0, actual = register.twenties(), message = "After taking away more bills than present, register now has 0 bills")
-        assertEquals(expected = 0, actual = register.tens(), message = "After taking away more bills than present, register now has 0 bills")
-        assertEquals(expected = 0, actual = register.fives(), message = "After taking away more bills than present, register now has 0 bills")
-        assertEquals(expected = 0, actual = register.twos(), message = "After taking away more bills than present, register now has 0 bills")
-        assertEquals(expected = 0, actual = register.ones(), message = "After taking away more bills than present, register now has 0 bills")
+        val message = register.take(bills)
+        assertEquals(expected = 5, actual = register.twenties(), message = "After trying to take away more bills than present, register still has 5 bills")
+        assertEquals(expected = 5, actual = register.tens(), message = "After trying to take away more bills than present, register still has 5 bills")
+        assertEquals(expected = 5, actual = register.fives(), message = "After trying to take away more bills than present, register still has 5 bills")
+        assertEquals(expected = 5, actual = register.twos(), message = "After trying to take away more bills than present, register still has 5 bills")
+        assertEquals(expected = 5, actual = register.ones(), message = "After trying to take away more bills than present, register still has 5 bills")
+
+        assertEquals(expected = "I apologize, but I cannot give you 6 7 8 9 10 bills, I do not have enough bills.\n$190 5 5 5 5 5", actual = message, message = "When more bills than are present (of any kind are taken), register returns error")
     }
 
 
