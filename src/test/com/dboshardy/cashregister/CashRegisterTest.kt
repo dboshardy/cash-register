@@ -52,6 +52,12 @@ class CashRegisterTest {
 
     @org.junit.Test
     fun testMakeChange() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val amount = 43
+        register.makeChange(amount)
+        assertEquals(expected = 3, actual = register.twenties(), message = "After making change, register now has 0 bills")
+        assertEquals(expected = 5, actual = register.tens(), message = "After making change, register now has 0 bills")
+        assertEquals(expected = 5, actual = register.fives(), message = "After making change, register now has 0 bills")
+        assertEquals(expected = 4, actual = register.twos(), message = "After making change, register now has 0 bills")
+        assertEquals(expected = 4, actual = register.ones(), message = "After making change, register now has 0 bills")
     }
 }
