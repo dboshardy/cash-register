@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 
 class CashRegisterTest {
     private var register: CashRegister = CashRegister() // empty register
-
     @Before
     fun setUp() {
         val bills = listOf(5, 5, 5, 5, 5)
@@ -39,6 +38,17 @@ class CashRegisterTest {
     fun testShowBillsInRegister() {
         assertEquals(expected = "$${5 * 20 + 10 * 5 + 5 * 5 + 2 * 5 + 5} 5 5 5 5 5", actual = register.show(), message = "Register should output total value and all bills contained within register when show() is called.")
     }
+    @org.junit.Test
+    fun testTakeTooManyBills() {
+        val bills = listOf(6, 7, 8, 9, 10)
+        register.take(bills)
+        assertEquals(expected = 0, actual = register.twenties(), message = "After taking away more bills than present, register now has 0 bills")
+        assertEquals(expected = 0, actual = register.tens(), message = "After taking away more bills than present, register now has 0 bills")
+        assertEquals(expected = 0, actual = register.fives(), message = "After taking away more bills than present, register now has 0 bills")
+        assertEquals(expected = 0, actual = register.twos(), message = "After taking away more bills than present, register now has 0 bills")
+        assertEquals(expected = 0, actual = register.ones(), message = "After taking away more bills than present, register now has 0 bills")
+    }
+
 
     @org.junit.Test
     fun testMakeChange() {
