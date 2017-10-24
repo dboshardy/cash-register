@@ -1,6 +1,5 @@
 package com.dboshardy.cashregister.model
 
-import com.sun.javaws.exceptions.InvalidArgumentException
 
 data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
     private val PROPER_INPUT_FORMAT = "TWENTIES TENS FIVES TWOS ONES"
@@ -163,3 +162,4 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
 
 class NotEnoughBillsInRegisterException : Throwable() {}
 class ChangeNotAvailableException : Throwable() {}
+class BadArgumentException: Throwable() {}
