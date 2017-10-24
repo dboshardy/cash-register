@@ -1,6 +1,8 @@
 # Cash Register (Change Machine)
 
 ## To run
+*NOTE: This requires Java 8 and Kotlin 1.1.51.*
+
 Either import the project into Intellij using `File > New > Project From Existing Sources > (select dir) > Import Project From External Model > Choose Maven > click Search Recursively For Maven Projects and automatically import`
 Once the project has been loaded into IntelliJ, right click on `CashRegisterRunner` and click "Run".
 
