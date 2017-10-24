@@ -2,15 +2,14 @@ package com.dboshardy.cashregister.model
 
 
 data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
-    private val PROPER_INPUT_FORMAT = "TWENTIES TENS FIVES TWOS ONES"
-    private val TWENTIES_INDEX = 0
-    private val TENS_INDEX = 1
-    private val FIVES_INDEX = 2
-    private val TWOS_INDEX = 3
-    private val ONES_INDEX = 4
+    private val properInputNumber = "TWENTIES TENS FIVES TWOS ONES"
+    private val twentiesIndex = 0
+    private val tensIndex = 1
+    private val fivesIndex = 2
+    private val twosIndex = 3
+    private val onesIndex = 4
 
-    private val NUM_BILL_TYPES = bills.size
-
+    private val numberBills = 5
 
     /*
      * returns string of values
@@ -36,25 +35,25 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
             // throw error if you run out of bills before amount is 0
             throw ChangeNotAvailableException()
         } else {
-            if (billsToEdit[TWENTIES_INDEX] != 0 && amount >= 20) {
-                billsToEdit[TWENTIES_INDEX]--
-                change[TWENTIES_INDEX]++
+            if (billsToEdit[twentiesIndex] != 0 && amount >= 20) {
+                billsToEdit[twentiesIndex]--
+                change[twentiesIndex]++
                 makeChange(amount - 20, billsToEdit, change)
-            } else if (billsToEdit[TENS_INDEX] != 0 && amount >= 10) {
-                billsToEdit[TENS_INDEX]--
-                change[TENS_INDEX]++
+            } else if (billsToEdit[tensIndex] != 0 && amount >= 10) {
+                billsToEdit[tensIndex]--
+                change[tensIndex]++
                 makeChange(amount - 10, billsToEdit, change)
-            } else if (billsToEdit[FIVES_INDEX] != 0 && amount >= 5) {
-                billsToEdit[FIVES_INDEX]--
-                change[FIVES_INDEX]++
+            } else if (billsToEdit[fivesIndex] != 0 && amount >= 5) {
+                billsToEdit[fivesIndex]--
+                change[fivesIndex]++
                 makeChange(amount - 5, billsToEdit, change)
-            } else if (billsToEdit[TWOS_INDEX] != 0 && amount >= 2) {
-                billsToEdit[TWOS_INDEX]--
-                change[TWOS_INDEX]++
+            } else if (billsToEdit[twosIndex] != 0 && amount >= 2) {
+                billsToEdit[twosIndex]--
+                change[twosIndex]++
                 makeChange(amount - 2, billsToEdit, change)
-            } else if (billsToEdit[ONES_INDEX] != 0 && amount >= 1) {
-                billsToEdit[ONES_INDEX]--
-                change[ONES_INDEX]++
+            } else if (billsToEdit[onesIndex] != 0 && amount >= 1) {
+                billsToEdit[onesIndex]--
+                change[onesIndex]++
                 makeChange(amount - 1, billsToEdit, change)
             } else if (amount != 0) {
                 throw ChangeNotAvailableException()
@@ -73,8 +72,8 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
      * Takes an array of bills assumed to be in proper order and puts them in the register
      */
     fun put(bills: List<Int>): String {
-        if (bills.size != NUM_BILL_TYPES) {
-            return "Could not add bills, please specify bills in the proper format: 'put ${PROPER_INPUT_FORMAT}'"
+        if (bills.size != numberBills) {
+            return "Could not add bills, please specify bills in the proper format: 'put $properInputNumber'"
         }
 
         this.bills = this.bills.zip(bills).map { it.first + it.second }
@@ -86,8 +85,8 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
      * Takes an array of bills assumed to be in proper order and takes them out of the register
      */
     fun take(bills: List<Int>): String {
-        if (bills.size != NUM_BILL_TYPES) {
-            return "Could not add bills, please specify bills in the proper format: 'put ${PROPER_INPUT_FORMAT}'"
+        if (bills.size != numberBills) {
+            return "Could not add bills, please specify bills in the proper format: 'put $properInputNumber'"
         }
 
         try {
@@ -128,11 +127,11 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
 
     private fun valueOf(index: Int): Int {
         return when (index) {
-            TWENTIES_INDEX -> 20
-            TENS_INDEX -> 10
-            FIVES_INDEX -> 5
-            TWOS_INDEX -> 2
-            ONES_INDEX -> 1
+            twentiesIndex -> 20
+            tensIndex -> 10
+            fivesIndex -> 5
+            twosIndex -> 2
+            onesIndex -> 1
             else -> 0
         }
 
@@ -140,26 +139,25 @@ data class CashRegister(private var bills: List<Int> = listOf(0, 0, 0, 0, 0)) {
 
 
     fun twenties(): Int {
-        return bills[TWENTIES_INDEX]
+        return bills[twentiesIndex]
     }
 
     fun tens(): Int {
-        return bills[TENS_INDEX]
+        return bills[tensIndex]
     }
 
     fun fives(): Int {
-        return bills[FIVES_INDEX]
+        return bills[fivesIndex]
     }
 
     fun twos(): Int {
-        return bills[TWOS_INDEX]
+        return bills[twosIndex]
     }
 
     fun ones(): Int {
-        return bills[ONES_INDEX]
+        return bills[onesIndex]
     }
 }
 
-class NotEnoughBillsInRegisterException : Throwable() {}
-class ChangeNotAvailableException : Throwable() {}
-class BadArgumentException: Throwable() {}
+class NotEnoughBillsInRegisterException : Throwable()
+class ChangeNotAvailableException : Throwable()
